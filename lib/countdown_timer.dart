@@ -7,17 +7,17 @@ part 'countdown_timer.controller.dart';
 part 'countdown_timer.painter.dart';
 
 class CountDownTimer extends StatefulWidget {
-  /// Filling Color for Countdown Widget.
-  final Color fillColor;
+  /// Progress Color for Countdown Widget.
+  final Color progressStrokeColor;
 
-  /// Filling Gradient for Countdown Widget.
-  final Gradient? fillGradient;
+  /// Progress Gradient for Countdown Widget.
+  final Gradient? progressStrokeGradient;
 
-  /// Ring Color for Countdown Widget.
-  final Color ringColor;
+  /// Back stroke Color for Countdown Widget.
+  final Color backStrokeColor;
 
-  /// Ring Gradient for Countdown Widget.
-  final Gradient? ringGradient;
+  /// Back stroke Gradient for Countdown Widget.
+  final Gradient? backStrokeGradient;
 
   /// Background Color for Countdown Widget.
   final Color? backgroundColor;
@@ -71,11 +71,11 @@ class CountDownTimer extends StatefulWidget {
     required this.width,
     required this.height,
     required this.duration,
-    required this.fillColor,
-    required this.ringColor,
+    required this.progressStrokeColor,
+    required this.backStrokeColor,
     this.backgroundColor,
-    this.fillGradient,
-    this.ringGradient,
+    this.progressStrokeGradient,
+    this.backStrokeGradient,
     this.backgroundGradient,
     this.initialDuration = 0,
     this.isReverse = false,
@@ -227,10 +227,10 @@ class CountDownTimerState extends State<CountDownTimer>
                       child: CustomPaint(
                         painter: CountdownTimerPainter(
                           animation: _countDownAnimation ?? _controller,
-                          fillColor: widget.fillColor,
-                          fillGradient: widget.fillGradient,
-                          ringColor: widget.ringColor,
-                          ringGradient: widget.ringGradient,
+                          progressStrokeColor: widget.progressStrokeColor,
+                          progressStrokeGradient: widget.progressStrokeGradient,
+                          backStrokeColor: widget.backStrokeColor,
+                          backStrokeGradient: widget.backStrokeGradient,
                           strokeWidth: widget.strokeWidth,
                           strokeCap: widget.strokeCap,
                           isReverse: widget.isReverse,
@@ -242,20 +242,6 @@ class CountDownTimerState extends State<CountDownTimer>
                     ),
                     if (widget.builder != null)
                       widget.builder!(context, duration),
-                    // widget.isTimerTextShown
-                    //     ? Align(
-                    //         alignment: FractionalOffset.center,
-                    //         child: Text(
-                    //           time,
-                    //           style: widget.textStyle ??
-                    //               const TextStyle(
-                    //                 fontSize: 16.0,
-                    //                 color: Colors.black,
-                    //               ),
-                    //           textAlign: widget.textAlign,
-                    //         ),
-                    //       )
-                    //     : Container(),
                   ],
                 ),
               ),

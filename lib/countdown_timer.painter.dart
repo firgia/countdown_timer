@@ -3,10 +3,10 @@ part of countdown_timer;
 class CountdownTimerPainter extends CustomPainter {
   CountdownTimerPainter({
     this.animation,
-    this.fillColor,
-    this.fillGradient,
-    this.ringColor,
-    this.ringGradient,
+    this.progressStrokeColor,
+    this.progressStrokeGradient,
+    this.backStrokeColor,
+    this.backStrokeGradient,
     this.strokeWidth,
     this.strokeCap,
     this.backgroundColor,
@@ -16,24 +16,26 @@ class CountdownTimerPainter extends CustomPainter {
   }) : super(repaint: animation);
 
   final Animation<double>? animation;
-  final Color? fillColor, ringColor, backgroundColor;
+  final Color? progressStrokeColor, backStrokeColor, backgroundColor;
   final double? strokeWidth;
   final StrokeCap? strokeCap;
   final bool? isReverse, isReverseAnimation;
-  final Gradient? fillGradient, ringGradient, backgroundGradient;
+  final Gradient? progressStrokeGradient,
+      backStrokeGradient,
+      backgroundGradient;
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = ringColor!
+      ..color = backStrokeColor!
       ..strokeWidth = strokeWidth!
       ..strokeCap = strokeCap!
       ..style = PaintingStyle.stroke;
 
-    if (ringGradient != null) {
+    if (backStrokeGradient != null) {
       final rect = Rect.fromCircle(
           center: size.center(Offset.zero), radius: size.width / 2);
-      paint.shader = ringGradient!.createShader(rect);
+      paint.shader = backStrokeGradient!.createShader(rect);
     } else {
       paint.shader = null;
     }
@@ -48,13 +50,13 @@ class CountdownTimerPainter extends CustomPainter {
     //   startAngle = -math.pi / 2;
     // }
 
-    if (fillGradient != null) {
+    if (progressStrokeGradient != null) {
       final rect = Rect.fromCircle(
           center: size.center(Offset.zero), radius: size.width / 2);
-      paint.shader = fillGradient!.createShader(rect);
+      paint.shader = progressStrokeGradient!.createShader(rect);
     } else {
       paint.shader = null;
-      paint.color = fillColor!;
+      paint.color = progressStrokeColor!;
     }
 
     canvas.drawArc(Offset.zero & size, startAngle, progress, false, paint);
@@ -77,7 +79,7 @@ class CountdownTimerPainter extends CustomPainter {
   @override
   bool shouldRepaint(CountdownTimerPainter oldDelegate) {
     return animation!.value != oldDelegate.animation!.value ||
-        ringColor != oldDelegate.ringColor ||
-        fillColor != oldDelegate.fillColor;
+        backStrokeColor != oldDelegate.backStrokeColor ||
+        progressStrokeColor != oldDelegate.progressStrokeColor;
   }
 }

@@ -46,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 200,
               height: 200,
               duration: 10,
-              fillColor: Colors.red,
-              ringColor: Colors.blue,
+              progressStrokeColor: Colors.red,
+              backStrokeColor: Colors.grey,
               autoStart: false,
               onStart: () {
                 log("on start");
